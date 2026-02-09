@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMH2.tech — AI Automation for Small Business</title>
+    <meta name="description" content="AI automation consulting for small to medium businesses. Built by an engineer who runs his own businesses and automates them.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-800: #262626;
+            --transition: cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Grain overlay for texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 9999;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s var(--transition), transform 0.6s var(--transition);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-mark {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            transition: color 0.3s var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--black);
+        }
+
+        .nav-cta {
+            padding: 10px 20px;
+            background: var(--black);
+            color: var(--white) !important;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: opacity 0.3s var(--transition);
+        }
+
+        .nav-cta:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--black);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 72px;
+        }
+
+        .hero-content {
+            padding: 120px 0;
+        }
+
+        .hero-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+            max-width: 800px;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            max-width: 520px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        /* Specialization tags */
+        .specializations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 48px;
+        }
+
+        .spec-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid var(--gray-200);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            transition: all 0.3s var(--transition);
+        }
+
+        .spec-tag:hover {
+            border-color: var(--black);
+            color: var(--black);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            transition: all 0.3s var(--transition);
+        }
+
+        .hero-cta:hover {
+            gap: 20px;
+        }
+
+        .hero-cta svg {
+            transition: transform 0.3s var(--transition);
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Section styling */
+        section {
+            padding: 120px 0;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .section-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-400);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--gray-600);
+            max-width: 480px;
+            line-height: 1.7;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--gray-200);
+            margin-top: 80px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 48px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s var(--transition);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--black);
+            transform: translateY(100%);
+            transition: transform 0.4s var(--transition);
+            z-index: 0;
+        }
+
+        .service-card:hover::before {
+            transform: translateY(0);
+        }
+
+        .service-card > * {
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s var(--transition);
+        }
+
+        .service-card:hover > * {
+            color: var(--white);
+        }
+
+        .service-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-400);
+            margin-bottom: 32px;
+        }
+
+        .service-card:hover .service-number {
+            color: var(--gray-500);
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .service-desc {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .service-card:hover .service-desc {
+            color: var(--gray-400);
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .service-details {
+            font-size: 0.8125rem;
+            color: var(--gray-500);
+            margin-top: 8px;
+        }
+
+        /* Full-width work section like LeftClick */
+        .work-section {
+            padding: 0;
+        }
+
+        .work-section .container {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+
+        .work-full-grid {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .work-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+            border-top: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .work-item:last-child {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .work-item-content {
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .work-item-image {
+            position: relative;
+            overflow: hidden;
+            background: var(--gray-100);
+        }
+
+        .work-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all 0.6s var(--transition);
+            transform: scale(1);
+        }
+
+        .work-item:hover .work-item-image img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        /* Hover overlay effect */
+        .work-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--black);
+            opacity: 0;
+            transition: opacity 0.4s var(--transition);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .work-item:hover::before {
+            opacity: 0.03;
+        }
+
+        .work-item .work-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-400);
+            margin-bottom: 24px;
+        }
+
+        .work-item .work-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+
+        .work-item .work-desc {
+            font-size: 1rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 400px;
+        }
+
+        .work-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .work-link-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--black);
+            transition: gap 0.3s var(--transition);
+        }
+
+        .work-link-primary:hover {
+            gap: 16px;
+        }
+
+        .work-link-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-500);
+            transition: color 0.3s var(--transition);
+        }
+
+        .work-link-secondary:hover {
+            color: var(--black);
+        }
+
+        /* Icon placeholder for Article Writer */
+        .work-icon-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray-100);
+        }
+
+        .work-icon-placeholder svg {
+            width: 120px;
+            height: 120px;
+            color: var(--gray-300);
+            transition: all 0.6s var(--transition);
+        }
+
+        .work-item:hover .work-icon-placeholder svg {
+            color: var(--gray-500);
+            transform: scale(1.1);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--gray-200);
+            margin-top: 80px;
+        }
+
+        .stat {
+            background: var(--white);
+            padding: 48px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .credentials {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .credential {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .credential-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .credential h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .credential p {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin: 0;
+        }
+
+        .about-card {
+            background: var(--gray-100);
+            padding: 48px;
+        }
+
+        .about-card-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        /* Photo placeholder - replace src with your actual photo */
+        .avatar-photo {
+            width: 80px;
+            height: 80px;
+            background: var(--gray-200);
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.4s var(--transition);
+        }
+
+        .about-card:hover .avatar-photo {
+            filter: grayscale(0%);
+        }
+
+        .avatar-placeholder {
+            width: 80px;
+            height: 80px;
+            background: var(--black);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .about-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .about-role {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        .about-quote {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            border-left: 2px solid var(--black);
+            padding-left: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-links a {
+            color: var(--gray-500);
+            transition: color 0.3s var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--black);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-section .section-number {
+            color: var(--gray-500);
+        }
+
+        .cta-section .section-title {
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .cta-section .section-subtitle {
+            color: var(--gray-400);
+            margin: 0 auto 48px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            background: var(--white);
+            color: var(--black);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            transition: all 0.3s var(--transition);
+        }
+
+        .cta-button:hover {
+            gap: 20px;
+            background: var(--gray-100);
+        }
+
+        .cta-email {
+            margin-top: 24px;
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .cta-email a {
+            color: var(--gray-400);
+            border-bottom: 1px solid var(--gray-600);
+            transition: all 0.3s var(--transition);
+        }
+
+        .cta-email a:hover {
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            transition: color 0.3s var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--black);
+        }
+
+        .copyright {
+            font-size: 0.8125rem;
+            color: var(--gray-400);
+        }
+
+        /* Responsive - mobile breakpoint */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .work-item {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .work-item-content {
+                padding: 48px 24px;
+                order: 2;
+            }
+
+            .work-item-image {
+                height: 300px;
+                order: 1;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-inner">
+            <a href="#" class="logo">
+                <span class="logo-mark">
+                    <span class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </span>
+                    CMH2.tech
+                </span>
+            </a>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#about">About</a>
+                <a href="#contact" class="nav-cta">Get in touch</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" style="border: none;">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-label">AI & Automation Consulting</span>
+                <h1>I build systems that do the boring work for you.</h1>
+                <p>AI automation for small business owners who'd rather grow their business than drown in repetitive tasks. Not theory—real systems I run in my own companies.</p>
+
+                <!-- Specialization tags -->
+                <div class="specializations">
+                    <span class="spec-tag">RAG & Document Search</span>
+                    <span class="spec-tag">Real Estate Investors</span>
+                    <span class="spec-tag">Professional Services</span>
+                    <span class="spec-tag">Workflow Automation</span>
+                    <span class="spec-tag">AI Integration</span>
+                </div>
+
+                <a href="#contact" class="hero-cta">
+                    Book a call
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+        <div class="container fade-in">
+            <span class="section-number">01</span>
+            <h2 class="section-title">Services</h2>
+            <p class="section-subtitle">Three ways to work together, depending on where you are in your automation journey.</p>
+        </div>
+        <div class="container fade-in">
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-number">01</span>
+                    <h3 class="service-title">AI Audit</h3>
+                    <p class="service-desc">I analyze your workflows and identify the top 3 automation opportunities with the highest ROI for your business.</p>
+                    <div class="service-price">$500</div>
+                    <div class="service-details">2-hour session + report</div>
+                </div>
+                <div class="service-card">
+                    <span class="service-number">02</span>
+                    <h3 class="service-title">Custom Build</h3>
+                    <p class="service-desc">From workflow automation to document search systems (RAG) — I build AI solutions tailored to your specific business needs.</p>
+                    <div class="service-price">$2K–10K</div>
+                    <div class="service-details">Project + 30 days support</div>
+                </div>
+                <div class="service-card">
+                    <span class="service-number">03</span>
+                    <h3 class="service-title">Retainer</h3>
+                    <p class="service-desc">I become your fractional automation lead. Continuous improvements, new builds, priority support.</p>
+                    <div class="service-price">$1,500/mo</div>
+                    <div class="service-details">10 hours + async support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" class="work-section">
+        <div class="container fade-in">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Selected Work</h2>
+            <p class="section-subtitle">These aren't mockups. These are tools I built and use every day in my own businesses.</p>
+        </div>
+
+        <div class="work-full-grid fade-in">
+            <!-- Rivvet.ca -->
+            <div class="work-item">
+                <div class="work-item-content">
+                    <span class="work-label">Product — Invoice Automation</span>
+                    <h3 class="work-title">Rivvet.ca</h3>
+                    <p class="work-desc">AI-powered invoice tracker for Canadian landlords and small businesses. Snap a photo in Telegram, it extracts the data, categorizes for CRA tax forms, and files to your Google Drive.</p>
+                    <div class="work-links">
+                        <a href="https://rivvet.ca" target="_blank" class="work-link-primary">
+                            View project
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                <path d="M1 13L13 1M13 1H5M13 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <!-- Add your LinkedIn article link here -->
+                        <!--
+                        <a href="YOUR_LINKEDIN_ARTICLE_URL" target="_blank" class="work-link-secondary">
+                            Read how I built it
+                            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                                <path d="M1 13L13 1M13 1H5M13 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        -->
+                    </div>
+                </div>
+                <div class="work-item-image">
+                    <img src="images/Rivvet.ca.png" alt="Rivvet.ca Invoice Tracker">
+                </div>
+            </div>
+
+            <!-- Article Writer -->
+            <div class="work-item">
+                <div class="work-item-image">
+                    <div class="work-icon-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                            <path d="M2 2l7.586 7.586"/>
+                            <circle cx="11" cy="11" r="2"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="work-item-content">
+                    <span class="work-label">Open Source — Content Automation</span>
+                    <h3 class="work-title">Article Writer</h3>
+                    <p class="work-desc">AI writing system that learns your personal style. Draft articles from ideas, fact-check, translate, and publish to Substack or WeChat with a single command.</p>
+                    <div class="work-links">
+                        <a href="https://github.com/hehuan2363/article-writer-skill" target="_blank" class="work-link-primary">
+                            View on GitHub
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                <path d="M1 13L13 1M13 1H5M13 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <!-- Add your LinkedIn article link here -->
+                        <!--
+                        <a href="YOUR_LINKEDIN_ARTICLE_URL" target="_blank" class="work-link-secondary">
+                            Read how I built it
+                            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                                <path d="M1 13L13 1M13 1H5M13 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="stats fade-in">
+                <div class="stat">
+                    <div class="stat-value">5+ hrs</div>
+                    <div class="stat-label">Saved weekly on bookkeeping</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">90%</div>
+                    <div class="stat-label">Less manual data entry</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">Seconds</div>
+                    <div class="stat-label">To generate tax reports</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="container fade-in">
+            <span class="section-number">03</span>
+            <h2 class="section-title">About</h2>
+            <p class="section-subtitle">I'm not a consultant who reads about AI. I'm an engineer who builds it and uses it to run my own businesses.</p>
+        </div>
+        <div class="container fade-in">
+            <div class="about-grid">
+                <div class="about-content">
+                    <p>After 10 years as a nuclear engineer building safety-critical systems, I spent the last 5 years leading AI adoption at my engineering firm. Along the way, I started a rental property portfolio and automated everything I could—bookkeeping, tenant communication, maintenance tracking.</p>
+                    <p>Now I help other small business owners do the same. Every solution I propose is something I've tested on myself first.</p>
+
+                    <div class="credentials">
+                        <div class="credential">
+                            <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                            <div>
+                                <h4>RAG & Document Search</h4>
+                                <p>Built enterprise search systems over thousands of documents.</p>
+                            </div>
+                        </div>
+                        <div class="credential">
+                            <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                            <div>
+                                <h4>Engineering Background</h4>
+                                <p>10+ years in nuclear. I build systems that don't break.</p>
+                            </div>
+                        </div>
+                        <div class="credential">
+                            <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                            <div>
+                                <h4>Real Business Owner</h4>
+                                <p>Rental portfolio. I know SMB pain points firsthand.</p>
+                            </div>
+                        </div>
+                        <div class="credential">
+                            <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                            <div>
+                                <h4>Enterprise AI Experience</h4>
+                                <p>Led AI transformation at my engineering firm.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-header">
+                        <img src="images/avatar.jpg" alt="Huan He" class="avatar-photo">
+
+                        <div>
+                            <div class="about-name">Huan He</div>
+                            <div class="about-role">Founder, CMH2.tech</div>
+                        </div>
+                    </div>
+                    <p class="about-quote">"I spent years automating my own businesses before offering these services. Every solution I propose is something I've tested on myself first."</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/huan-he/" target="_blank" aria-label="LinkedIn">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.upwork.com/freelancers/huanhe" target="_blank" aria-label="Upwork">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/hehuan2363" target="_blank" aria-label="GitHub">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="cta-section">
+        <div class="container fade-in" style="text-align: center;">
+            <span class="section-number">04</span>
+            <h2 class="section-title">Let's automate the boring stuff.</h2>
+            <p class="section-subtitle">15 minutes. No sales pitch. Just problem-solving.</p>
+            <a href="https://calendly.com/huan-he-cmh2/30min" class="cta-button">
+                Book your call
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+            <p class="cta-email">Or email me at <a href="mailto:huan@cmh2.tech">huan@cmh2.tech</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-inner">
+            <span class="logo">CMH2.tech</span>
+            <div class="footer-links">
+                <a href="#services">Services</a>
+                <a href="#work">Work</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <span class="copyright">&copy; 2026</span>
+        </div>
+    </footer>
+
+    <!-- Scroll animation script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
