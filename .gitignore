@@ -1,20 +1,21 @@
+# Cold email campaign (local only — public repo at github.com/hehuan2363/cold-email-campaign)
+scripts/
+docs/coldemails/
+docs/Revised Marketing Strategy & Action Plan for CMH2.tech.md
+docs/images/Rivvet.ca.png
+docs/images/avatar.jpg
+CLAUDE.md
+.claude/skills/
+
 # Credentials & secrets
-docs/coldemails/credentials/
 *.pem
 *.key
 .env
-
-# Lead data (contains real people's PII)
-docs/coldemails/Leads/
 
 # Python
 __pycache__/
 *.pyc
 .venv/
-scripts/.venv/
-
-# uv
-scripts/.python-version
 
 # IDE
 .vscode/
