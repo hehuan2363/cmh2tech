@@ -1,0 +1,28 @@
+# Credentials & secrets
+docs/coldemails/credentials/
+*.pem
+*.key
+.env
+
+# Lead data (contains real people's PII)
+docs/coldemails/Leads/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+scripts/.venv/
+
+# uv
+scripts/.python-version
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings
+.claude/settings.local.json
